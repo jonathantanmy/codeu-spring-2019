@@ -23,6 +23,8 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.SortDirection;
+
+import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -62,21 +64,53 @@ public class Datastore {
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
-      try {
-        String idString = entity.getKey().getName();
-        UUID id = UUID.fromString(idString);
-        String text = (String) entity.getProperty("text");
-        long timestamp = (long) entity.getProperty("timestamp");
-
-        Message message = new Message(id, user, text, timestamp);
-        messages.add(message);
-      } catch (Exception e) {
-        System.err.println("Error reading message.");
-        System.err.println(entity.toString());
-        e.printStackTrace();
-      }
+      readMessage(entity, messages, user);
     }
 
     return messages;
   }
+
+  /**
+   * Fetches the messages for all users.
+   *
+   * @return a list of messages posted by all users, or empty list if there are no messages. List
+   * is sorted by time descending.
+   */
+  public List<Message> getAllMessages(){
+    List<Message> messages = new ArrayList<>();
+
+    Query query = new Query("Message")
+            .addSort("timestamp", SortDirection.DESCENDING);
+    PreparedQuery results = datastore.prepare(query);
+
+    for (Entity entity : results.asIterable()) {
+
+        String user = (String) entity.getProperty("user");
+        readMessage(entity, messages, user);
+
+    }
+
+    return messages;
+  }
+
+  /* Helper function that encapsulates the redundant segments of the getMessages
+   and getAllMessages functions; reads Messages.
+   */
+  public void readMessage(Entity entity, List<Message> messages, String user) {
+    try {
+      String idString = entity.getKey().getName();
+      UUID id = UUID.fromString(idString);
+      String text = (String) entity.getProperty("text");
+      long timestamp = (long) entity.getProperty("timestamp");
+
+      Message message = new Message(id, user, text, timestamp);
+      messages.add(message);
+    } catch (Exception e) {
+      System.err.println("Error reading message.");
+      System.err.println(entity.toString());
+      e.printStackTrace();
+    }
+  }
 }
+
+
