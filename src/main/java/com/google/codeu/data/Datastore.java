@@ -55,8 +55,6 @@ public class Datastore {
    * @return a list of messages posted by the user, or empty list if user has never posted a
    *     message. List is sorted by time descending.
    */
-
-  //Returns messages where the user is the recipient instead of the author.
   public List<Message> getMessages(String recipient) {
     List<Message> messages = new ArrayList<>();
 
@@ -109,6 +107,7 @@ public class Datastore {
 
     return messages;
   }
+
   /** Returns the total number of messages for all users. */
   public int getTotalMessageCount(){
     Query query = new Query("Message");
