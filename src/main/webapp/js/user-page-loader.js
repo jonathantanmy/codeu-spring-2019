@@ -30,7 +30,7 @@ function setPageTitle() {
 }
 
 /**
- * Shows the message form if the user is logged in and viewing their own page.
+ * Shows the message form as long as the user is logged in, even if they aren't viewing their own page.
  */
 function showMessageFormIfLoggedIn() {
   document.getElementById('about-me-form').classList.remove('hidden');
