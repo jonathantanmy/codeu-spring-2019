@@ -76,12 +76,19 @@ public class MessageServlet extends HttpServlet {
     }
 
     String user = userService.getCurrentUser().getEmail();
-    String text = Jsoup.clean(request.getParameter("text"), Whitelist.none());
+    //Use JSoup to sanitize the user data
+    String userText = Jsoup.clean(request.getParameter("text"), Whitelist.none());
     //Get value of a query parameter
     String recipient = request.getParameter("recipient");
 
+    //Add regular expression replacement logic
+    //Replace img URLs with <img> elements
+    String regex = "(https?://\\S+\\.(png|jpg|jpeg|gif))";
+    String replacement = "<img src=\"$1\" />";
+    String textWithImagesReplaced = userText.replaceAll(regex, replacement);
+
     //Pass the value of the recipient to the Message constructor
-    Message message = new Message(user, text, recipient);
+    Message message = new Message(user, textWithImagesReplaced, recipient);
     datastore.storeMessage(message);
 
     //Modify the redirect so the user returns to the page they came from instead of going back to their own page
