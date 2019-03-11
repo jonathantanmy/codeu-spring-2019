@@ -1,6 +1,7 @@
  google.charts.load('current', {packages: ['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart(){
+ google.charts.setOnLoadCallback(drawChart);
+ function drawChart(){
+
     var book_data = new google.visualization.DataTable();
     //define columns for the DataTable instance
     book_data.addColumn('string', 'Book Title');
@@ -17,9 +18,9 @@
 
     var chart = new google.visualization.BarChart(document.getElementById('book_chart'));
     var chart_options = {
-                          width: 800,
-                          height: 400
-            };
+    width: 800,
+    height: 400
+    };
     chart.draw(book_data, chart_options);
 
-    }
+  }
