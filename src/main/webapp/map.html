@@ -4,36 +4,8 @@
     <title>Map Project</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=
 AIzaSyAbpaCzxVuhKdW9to2hRjLcYfp8qrYzbqk"></script>
-    <script>
-    let map;
-    function createMap() {
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 37.422, lng: -122.084},
-        zoom: 16
-      });
-      const trexMarker = new google.maps.Marker({
-          position: {lat: 37.421903, lng: -122.084674},
-          map: map,
-          title: 'Stan the T-Rex'
-      });
-      var trexInfoWindow = new google.maps.InfoWindow({
-        content: 'This is stan, the T-Rex statue.'
-      });
-
-      trexMarker.addListener('click',function() {
-
-        trexInfoWindow.open(map, trexMarker);
-      });
-
-    }
-  </script>
-    <style>
-    #map{
-      width: 500px;
-      height: 500px;
-      border: thin solid black;
-    }
-  </style>
+    <script src="/js/maps.js"></script>
+    <link rel="stylesheet" href ="/css/maps.css">
 </head>
 <body onload="createMap();">
 <h1>Map Project</h1>
