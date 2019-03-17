@@ -40,10 +40,24 @@ function showMessageFormIfLoggedIn() {
       })
       .then((loginStatus) => {
         if (loginStatus.isLoggedIn) {
-          const messageForm = document.getElementById('message-form');
-          messageForm.action = '/messages?recipient=' + parameterUsername;  //add recipient parameter to the form's action attribute
-          messageForm.classList.remove('hidden');
+          fetchImageUploadUrlAndShowForm();
         }
+      });
+}
+
+/**
+  * Fetches the URL from the ImageUploadUrlServlet and uses JavaScript to set the form's action attribute
+  */
+function fetchImageUploadUrlAndShowForm() {
+  fetch('/image-upload-url')
+      .then((response) => {
+        return response.text();
+      })
+      .then((imageUploadUrl) => {
+        const messageForm = document.getElementById('message-form');
+        messageForm.action = imageUploadUrl;
+        messageForm.classList.remove('hidden');
+        document.getElementById('recipientInput').value = parameterUsername;
       });
 }
 
@@ -87,6 +101,11 @@ function buildMessageDiv(message) {
   messageDiv.classList.add('message-div');
   messageDiv.appendChild(headerDiv);
   messageDiv.appendChild(bodyDiv);
+
+  if(message.imageUrl){
+    bodyDiv.innerHTML += '<br/>';
+    bodyDiv.innerHTML += '<img src="' + message.imageUrl + '" />';
+  }
 
   return messageDiv;
 }

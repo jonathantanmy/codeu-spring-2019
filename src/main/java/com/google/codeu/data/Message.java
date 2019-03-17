@@ -26,6 +26,7 @@ public class Message {
   private String text;
   private long timestamp;
   private String recipient;
+  private String imageUrl;
 
   /**
    * Constructs a new {@link Message} posted by {@code user} with {@code text} content. Generates a
@@ -41,6 +42,20 @@ public class Message {
     this.text = text;
     this.timestamp = timestamp;
     this.recipient = recipient;
+  }
+
+  public Message(UUID id, String user, String text, long timestamp, String recipient, String imageUrl) {
+    this.id = id;
+    this.user = user;
+    this.text = text;
+    this.timestamp = timestamp;
+    this.recipient = recipient;
+    this.imageUrl = imageUrl;
+  }
+
+  public Message(String user, String userText) {
+    this.user = user;
+    this.text = userText;
   }
 
   public UUID getId() {
@@ -60,4 +75,8 @@ public class Message {
   }
 
   public String getRecipient() { return recipient; }
+
+  public String getImageUrl() { return imageUrl; }
+
+  public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 }
