@@ -31,7 +31,7 @@ public class MessageChartServlet extends HttpServlet{
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
-        List<Message> msgList = datastore.getMessages(null);
+        List<Message> msgList = datastore.getAllMessages();
         Gson gson = new Gson();
         String json = gson.toJson(msgList);
         response.getWriter().println(json);
