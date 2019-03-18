@@ -1,5 +1,5 @@
  google.charts.load('current', {packages: ['corechart']});
- google.charts.setOnLoadCallback(drawChart);
+ google.charts.setOnLoadCallback(fetchMessageData);
 
  // draw the chart from dataTable
  function drawChart(dataTable){
@@ -43,6 +43,4 @@
                  drawChart(msgData);
                });
          }
-
- fetchMessageData();
 

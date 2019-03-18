@@ -57,9 +57,6 @@ public class Datastore {
    */
   public List<Message> getMessages(String recipient) {
 
-    /** @return a list of all messages if recipient is not specified. */
-    if (recipient == null) return getAllMessages();
-
     List<Message> messages = new ArrayList<>();
 
     Query query =

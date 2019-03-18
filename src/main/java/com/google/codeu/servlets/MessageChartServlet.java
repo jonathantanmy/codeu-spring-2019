@@ -16,7 +16,7 @@ import com.google.gson.Gson;
  * Handles fetching all messages for the public feed.
  */
 @WebServlet("/messagechart")
-public class ChartServlet extends HttpServlet{
+public class MessageChartServlet extends HttpServlet{
 
     private Datastore datastore;
 
