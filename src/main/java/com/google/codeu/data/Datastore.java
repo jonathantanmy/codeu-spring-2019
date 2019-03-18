@@ -56,7 +56,6 @@ public class Datastore {
    *     message. List is sorted by time descending.
    */
   public List<Message> getMessages(String recipient) {
-
     List<Message> messages = new ArrayList<>();
 
     Query query =
