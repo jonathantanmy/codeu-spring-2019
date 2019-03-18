@@ -1,26 +1,48 @@
  google.charts.load('current', {packages: ['corechart']});
  google.charts.setOnLoadCallback(drawChart);
- function drawChart(){
 
-    var book_data = new google.visualization.DataTable();
-    //define columns for the DataTable instance
-    book_data.addColumn('string', 'Book Title');
-    book_data.addColumn('number', 'Votes');
+ // draw the chart from dataTable
+ function drawChart(dataTable){
 
-    //add data to book_data
-    book_data.addRows([
-    ["The Best We Could Do", 6],
-    ["Sing, Unburied, Sing", 10],
-    ["The Book of Unknown Americans", 7],
-    ["The 57 Bus", 4],
-    ["The Handmaid's Tale", 8]
-    ]);
-
-    var chart = new google.visualization.BarChart(document.getElementById('book_chart'));
+    var chart = new google.visualization.BarChart(document.getElementById('chart'));
     var chart_options = {
     width: 800,
     height: 400
     };
-    chart.draw(book_data, chart_options);
+
+    chart.draw(dataTable, chart_options);
 
   }
+
+ // fetches data to be used in the chart.
+ function fetchMessageData() {
+          fetch("/messagechart")
+               .then((response) => {
+                  return response.json();
+               })
+               .then((msgJson) => {
+                 var msgData = new google.visualization.DataTable();
+                 //define columns for the DataTable instance
+                 msgData.addColumn('date', 'Date');
+                 msgData.addColumn('number', 'Message Count');
+
+
+                 for (i = 0; i < msgJson.length; i++) {
+                     msgRow = [];
+                     var timestampAsDate = new Date (msgJson[i].timestamp);
+                     var totalMessages = i + 1;
+
+                     msgRow.push(timestampAsDate);
+                     msgRow.push(totalMessages);
+
+                     //console.log(msgRow);
+                     msgData.addRow(msgRow);
+
+                 }
+                 //console.log(msgData);
+                 drawChart(msgData);
+               });
+         }
+
+ fetchMessageData();
+
