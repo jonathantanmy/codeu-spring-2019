@@ -88,7 +88,7 @@ public class MessageServlet extends HttpServlet {
 
     String user = userService.getCurrentUser().getEmail();
     //Use JSoup to sanitize the user data
-    String userText = Jsoup.clean(request.getParameter("text"), Whitelist.none());
+    String userText = Jsoup.clean(request.getParameter("text"), Whitelist.basic());
     //Get value of a query parameter
     String recipient = request.getParameter("recipient");
 
