@@ -97,7 +97,7 @@ function buildUI() {
   showMessageFormIfLoggedIn();
   fetchMessages();
   fetchAboutMe();
-  const config = {removePlugins: [ 'MediaEmbed','Table' ]};
+  const config = {removePlugins: [ 'MediaEmbed','Table','ImageUpload' ]};
   ClassicEditor.create(document.getElementById('message-input'), config );
 }
 
