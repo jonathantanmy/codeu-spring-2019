@@ -96,7 +96,7 @@ public class MessageServlet extends HttpServlet {
 
     //Add regular expression replacement logic
     //Replace img URLs with <img> elements
-    String regex = "(https?://\\S+\\.(png|jpg|jpeg|gif))";
+    String regex = "((?<!href=\")https?://\\S+\\.(png|jpg|jpeg|gif))";
     String replacement = "<img src=\"$1\" />";
     String textWithImagesReplaced = userText.replaceAll(regex, replacement);
 
