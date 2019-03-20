@@ -1,19 +1,19 @@
 package com.google.codeu.servlets;
-
 import com.google.gson.Gson;
-import java.io.IOException;
 import com.google.gson.JsonArray;
+import java.io.IOException;
+import java.util.Scanner;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Scanner;
+
 
 /**
  * Returns bubble tea data as a JSON array, e.g. [{"lat": 38.4404675, "lng": -122.7144313}]
  */
-@WebServlet("/boba-final")
-public class mapsServlet extends HttpServlet{
+@WebServlet("/MapsServlet")
+public class MapsServlet extends HttpServlet{
 
     JsonArray bubbleTeaArray;
 
@@ -21,7 +21,7 @@ public class mapsServlet extends HttpServlet{
     public void init() {
         bubbleTeaArray = new JsonArray();
         Gson gson = new Gson();
-        Scanner scanner = new Scanner (getServletContext().getResourceAsStream("/WEB-INF/boba_final.csv"));
+        Scanner scanner = new Scanner (getServletContext().getResourceAsStream("/WEB-INF/MapsServlet.csv"));
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] cells = line.split("(?x)   " +
