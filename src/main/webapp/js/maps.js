@@ -1,21 +1,19 @@
 let map;
-    function createMap() {
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 37.422, lng: -122.084},
-        zoom: 16
-      });
-      const trexMarker = new google.maps.Marker({
-          position: {lat: 37.421903, lng: -122.084674},
-          map: map,
-          title: 'Stan the T-Rex'
-      });
-      var trexInfoWindow = new google.maps.InfoWindow({
-        content: 'This is stan, the T-Rex statue.'
-      });
+function createMap(){
+      fetch('/MapsServlet').then(function(response) {
+        return response.json();
+      }).then((BubbleTeaLocations) => {
 
-      trexMarker.addListener('click',function() {
+        const map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 40.7831, lng: -73.9712},
+          zoom:7
+        });
 
-        trexInfoWindow.open(map, trexMarker);
+        BubbleTeaLocations.forEach((BubbleTeaLocation) => {
+          new google.maps.Marker({
+            position: {lat: BubbleTeaLocation.lat, lng: BubbleTeaLocation.lng},
+            map: map
+          });
+        });
       });
-
     }
