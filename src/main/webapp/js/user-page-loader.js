@@ -107,6 +107,11 @@ function buildMessageDiv(message) {
     bodyDiv.innerHTML += '<img src="' + message.imageUrl + '" />';
   }
 
+  if(message.imageLabels){
+    bodyDiv.innerHTML += '<br/>';
+    bodyDiv.innerHTML += message.imageLabels;
+  }
+
   return messageDiv;
 }
 
