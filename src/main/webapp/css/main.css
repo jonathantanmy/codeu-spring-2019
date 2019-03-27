@@ -24,7 +24,7 @@ body {
 
 nav {
   background-color: #ccccff;
-  font-size: 18pt;
+  font-size: 18px;
   padding: 10px;
 }
 
@@ -35,6 +35,7 @@ nav a {
 
 h2 {
   margin: 0;
+  background-color: #ccccff;
 }
 
 input[type=submit] {
