@@ -27,6 +27,8 @@ public class Message {
   private long timestamp;
   private String recipient;
   private float sentimentScore;
+  private String imageUrl;
+  private String imageLabels;
 
   /**
    * Constructs a new {@link Message} posted by {@code user} with {@code text} content. Generates a
@@ -43,6 +45,23 @@ public class Message {
     this.timestamp = timestamp;
     this.recipient = recipient;
     this.sentimentScore = sentimentScore;
+  }
+
+  public Message(UUID id, String user, String text, long timestamp, String recipient, float sentimentScore,
+                 String imageUrl, String imageLabels) {
+    this.id = id;
+    this.user = user;
+    this.text = text;
+    this.timestamp = timestamp;
+    this.recipient = recipient;
+    this.sentimentScore = sentimentScore;
+    this.imageUrl = imageUrl;
+    this.imageLabels = imageLabels;
+  }
+
+  public Message(String user, String userText) {
+    this.user = user;
+    this.text = userText;
   }
 
   public UUID getId() {
@@ -65,4 +84,11 @@ public class Message {
 
   public float getSentimentScore() { return sentimentScore; }
 
+  public String getImageUrl() { return imageUrl; }
+
+  public String getImageLabels() { return imageLabels; }
+
+  public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+  public void setImageLabels(String imageLabel) { this.imageLabels = imageLabel; }
 }

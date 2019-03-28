@@ -18,26 +18,31 @@
    and will fill the width of its parent element. */
 #message-input {
   height: 100px;
-  width: 100%;
+  width: 99%;
 }
 
 /* Give each message a rounded border. */
-.message-div {
+/* .message-div {
   border: thin solid black;
   border-radius: 5px;
   margin-top: 20px;
-}
+} */
 
 /* Add a bottom border to the message header. */
 .message-header {
   border-bottom: thin solid black;
-  padding: 5px;
+  background-image: linear-gradient(to right, white , #ccccff);
 }
 
 /* Give the message body a margin so the text
    isn't too close to the border. */
 .message-body {
-  margin: 5px;
+  font: 12pt;
+}
+
+.panel {
+  background-color: white;
+  margin-top: 20px;
 }
 
 /* Restrict the size of images */
@@ -45,6 +50,20 @@
   display: block;
   margin-top: 25px;
   max-width: 75%;
+}
+
+.centered{
+  text-align: center;
+}
+
+.padded {
+  padding: 10px;
+}
+
+.rounded {
+  border: thin solid black;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 /* Use this to hide certain elements like forms if the
