@@ -18,6 +18,8 @@
       map.addListener('click', (event) => {
         createMarkerForEdit(event.latLng.lat(), event.latLng.lng());
       });
+
+      fetchMarkers();
     }
 
     function createMarkerForDisplay(lat, lng, content){
@@ -63,6 +65,7 @@
       button.appendChild(document.createTextNode('Submit'));
 
       button.onclick = () => {
+        postMarker(lat, lng, textBox.value);
         createMarkerForDisplay(lat, lng, textBox.value);
         editMarker.setMap(null);
       };
