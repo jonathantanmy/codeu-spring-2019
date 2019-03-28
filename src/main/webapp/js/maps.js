@@ -16,4 +16,11 @@ function createMap(){
           });
         });
       });
+
+      map.addListener('click', (event) => {
+        new google.maps.Marker({
+          position: event.latLng,
+          map: map
+        });
+      });
     }
