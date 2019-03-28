@@ -50,6 +50,8 @@ public class Datastore {
         messageEntity.setProperty("imageUrl", message.getImageUrl());
     }
 
+    messageEntity.setProperty("imageLabels", message.getImageLabels());
+
     datastore.put(messageEntity);
   }
 
@@ -78,7 +80,9 @@ public class Datastore {
         long timestamp = (long) entity.getProperty("timestamp");
 
         String imageUrl = (String) entity.getProperty("imageUrl");
-        Message message = new Message(id, user, text, timestamp, recipient, imageUrl);
+        String imageLabels = (String) entity.getProperty("imageLabels");
+
+        Message message = new Message(id, user, text, timestamp, recipient, imageUrl, imageLabels);
         messages.add(message);
       } catch (Exception e) {
         System.err.println("Error reading message.");
@@ -140,22 +144,21 @@ public class Datastore {
   }
   /** Stores the User in Datastore. */
   public void storeUser(User user) {
-    Entity userEntity = new Entity("User", user.getEmail());
-    userEntity.setProperty("email", user.getEmail());
-    userEntity.setProperty("aboutMe", user.getAboutMe());
-    datastore.put(userEntity);
+      Entity userEntity = new Entity("User", user.getEmail());
+      userEntity.setProperty("email", user.getEmail());
+      userEntity.setProperty("aboutMe", user.getAboutMe());
+      datastore.put(userEntity);
   }
 
  /**
   * Returns the User owned by the email address, or
   * null if no matching User was found.
   */
-  public User getUser(String email) {
-
-   Query query = new Query("User")
+ public User getUser(String email) {
+     Query query = new Query("User")
     .setFilter(new Query.FilterPredicate("email", FilterOperator.EQUAL, email));
-   PreparedQuery results = datastore.prepare(query);
-   Entity userEntity = results.asSingleEntity();
+     PreparedQuery results = datastore.prepare(query);
+     Entity userEntity = results.asSingleEntity();
    if(userEntity == null) {
    return null;
    }
