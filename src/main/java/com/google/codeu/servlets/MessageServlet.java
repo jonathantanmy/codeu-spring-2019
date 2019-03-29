@@ -23,8 +23,11 @@ import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.ServingUrlOptions;
 import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 import com.google.cloud.vision.v1.*;
+import com.google.appengine.api.users.UserServiceFactory;
+import com.google.cloud.language.v1.Document;
+import com.google.cloud.language.v1.LanguageServiceClient;
+import com.google.cloud.language.v1.Sentiment;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Message;
 import com.google.gson.Gson;
@@ -98,6 +101,9 @@ public class MessageServlet extends HttpServlet {
 
     String userText = Jsoup.clean(request.getParameter("text"), Whitelist.basic());
 
+    //gets sentiment score
+    float sentimentScore = getSentimentScore(userText);
+
     //Get value of a query parameter
     String recipient = request.getParameter("recipient");
 
@@ -108,7 +114,7 @@ public class MessageServlet extends HttpServlet {
     String textWithImagesReplaced = userText.replaceAll(regex, replacement);
 
     //Pass the value of the recipient to the Message constructor
-    Message message = new Message(user, textWithImagesReplaced, recipient);
+    Message message = new Message(user, textWithImagesReplaced, recipient, sentimentScore);
 
     if(blobKeys != null && !blobKeys.isEmpty()) {
       BlobKey blobKey = blobKeys.get(0);
@@ -125,6 +131,18 @@ public class MessageServlet extends HttpServlet {
 
     //Modify the redirect so the user returns to the page they came from instead of going back to their own page
     response.sendRedirect("/user-page.html?user=" + recipient);
+  }
+
+  //Analyzes a message and returns the sentiment score.
+  private float getSentimentScore(String text) throws IOException {
+      Document doc = Document.newBuilder()
+              .setContent(text).setType(Document.Type.PLAIN_TEXT).build();
+
+      LanguageServiceClient languageService = LanguageServiceClient.create();
+      Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+      languageService.close();
+
+      return sentiment.getScore();
   }
 
   private byte[] getBlobBytes(BlobstoreService blobstoreService, BlobKey blobKey)
