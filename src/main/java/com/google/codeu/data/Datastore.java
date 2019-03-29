@@ -131,7 +131,6 @@ public class Datastore {
       System.err.println(entity.toString());
       e.printStackTrace();
     }
-
   }
   /** Stores the User in Datastore. */
  public void storeUser(User user) {
