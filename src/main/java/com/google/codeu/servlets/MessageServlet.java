@@ -24,6 +24,10 @@ import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.ServingUrlOptions;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.Translation;
+import com.google.cloud.translate.Translate.TranslateOption;
 import com.google.cloud.vision.v1.*;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Message;
@@ -74,9 +78,17 @@ public class MessageServlet extends HttpServlet {
 
     List<Message> messages = datastore.getMessages(user);
     Gson gson = new Gson();
+
+    String targetLanguageCode = request.getParameter("language");
+
+    if(targetLanguageCode != null) {
+      translateMessages(messages, targetLanguageCode);
+    }
+
     String json = gson.toJson(messages);
 
     response.getWriter().println(json);
+
   }
 
   /** Stores a new {@link Message}. */
@@ -179,5 +191,19 @@ public class MessageServlet extends HttpServlet {
             .collect(Collectors.joining(", "));
 
     return labelsString;
+  }
+
+  private void translateMessages(List<Message> messages, String targetLanguageCode) {
+    Translate translate = TranslateOptions.getDefaultInstance().getService();
+
+    for(Message message : messages) {
+      String originalText = message.getText();
+
+      Translation translation =
+              translate.translate(originalText, TranslateOption.targetLanguage(targetLanguageCode));
+      String translatedText = translation.getTranslatedText();
+
+      message.setText(translatedText);
+    }
   }
 }

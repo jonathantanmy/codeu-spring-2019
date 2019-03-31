@@ -85,4 +85,6 @@ public class Message {
   public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
   public void setImageLabels(String imageLabel) { this.imageLabels = imageLabel; }
+
+  public void setText(String text) { this.text = text; }
 }
