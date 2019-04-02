@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>location-form</title>
+</head>
+<body>
+
+<div class="padded rounded panel centered">
+    <h1 id="page-title">Location Form</h1>
+</div>
+
+<div class="padded rounded panel">
+    <form id="location-form" class="hidden" method="POST" enctype = "multipart/form-data">
+        <h2>Enter a new Location:</h2>
+
+        Name your Location
+        <br/>
+        <textarea name="text" id="location-input" class="rounded"></textarea>
+        <br/>
+
+        Enter a description
+        <br/>
+        <textarea name="text" id="description-input" class="rounded"></textarea>
+        <br/>
+
+        <!-- <input type="submit" value="Submit" class="rounded"> -->
+        Add an image to your Location
+        <input type="file" name="image">
+        <br/>
+        <input type = "hidden" value = "" name = "recipient" id = "recipientInput">
+        <input type="submit" value="Submit">
+    </form>
+</div>
+<hr/>
+
+
+</body>
+</html>
