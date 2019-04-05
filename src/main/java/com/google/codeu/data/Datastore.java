@@ -56,6 +56,15 @@ public class Datastore {
     datastore.put(messageEntity);
   }
 
+    /** Stores the Location in Datastore. */
+    public void storeLocation(Location location) {
+        Entity locationEntity = new Entity("Location", location.getID().toString());
+        locationEntity.setProperty("name", location.getName());
+        locationEntity.setProperty("description", location.getDescription());
+
+        datastore.put(locationEntity);
+    }
+
   /**
    * Gets messages addressed to a specific recipient.
    *
