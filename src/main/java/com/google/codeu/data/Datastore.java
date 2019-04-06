@@ -45,6 +45,7 @@ public class Datastore {
     messageEntity.setProperty("text", message.getText());
     messageEntity.setProperty("timestamp", message.getTimestamp());
     messageEntity.setProperty("recipient", message.getRecipient());
+    messageEntity.setProperty("sentimentScore", message.getSentimentScore());
 
     if(message.getImageUrl() != null) {
         messageEntity.setProperty("imageUrl", message.getImageUrl());
@@ -71,24 +72,9 @@ public class Datastore {
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
-      try {
-        String idString = entity.getKey().getName();
-        UUID id = UUID.fromString(idString);
-        String user = (String) entity.getProperty("user");
 
-        String text = (String) entity.getProperty("text");
-        long timestamp = (long) entity.getProperty("timestamp");
+        readMessage(entity, messages, recipient);
 
-        String imageUrl = (String) entity.getProperty("imageUrl");
-        String imageLabels = (String) entity.getProperty("imageLabels");
-
-        Message message = new Message(id, user, text, timestamp, recipient, imageUrl, imageLabels);
-        messages.add(message);
-      } catch (Exception e) {
-        System.err.println("Error reading message.");
-        System.err.println(entity.toString());
-        e.printStackTrace();
-      }
     }
 
     return messages;
@@ -134,7 +120,11 @@ public class Datastore {
       String text = (String) entity.getProperty("text");
       long timestamp = (long) entity.getProperty("timestamp");
       String recipient = (String) entity.getProperty("recipient");
-      Message message = new Message(id, user, text, timestamp, recipient);
+      float sentimentScore = (entity.getProperty("sentimentScore") != null) ?
+                ((Double) entity.getProperty("sentimentScore")).floatValue() : 0;
+      String imageUrl = (String) entity.getProperty("imageUrl");
+      String imageLabels = (String) entity.getProperty("imageLabels");
+      Message message = new Message(id, user, text, timestamp, recipient,sentimentScore, imageUrl, imageLabels);
       messages.add(message);
     } catch (Exception e) {
       System.err.println("Error reading message.");
