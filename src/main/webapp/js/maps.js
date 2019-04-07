@@ -15,15 +15,15 @@ function createMap(){
             map: map
           });
           var name = BubbleTeaLocation.name
-          addInfoWindow(marker, name)
+          addInfoWindow(map, marker, name)
         });
       });
 }
 function addInfoWindow(map, marker, message) {
   var infoWindow = new google.maps.InfoWindow({
-    content: name
+    content: message
   });
-  google.maps.event.addListener('click', () => {
+  marker.addListener('click', () => {
     infoWindow.open(map, marker);
   });
   
