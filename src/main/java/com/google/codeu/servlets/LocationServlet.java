@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/locationServlet")
+@WebServlet("/location")
 public class LocationServlet extends HttpServlet {
 
     private Datastore datastore;
@@ -21,6 +21,7 @@ public class LocationServlet extends HttpServlet {
         datastore = new Datastore();
     }
 
+    @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
 
