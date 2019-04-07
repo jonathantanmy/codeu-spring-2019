@@ -59,7 +59,7 @@ response.getOutputStream().println(userData.getAboutMe());
 
   UserService userService = UserServiceFactory.getUserService();
   if (!userService.isUserLoggedIn()) {
-   response.sendRedirect("/index.html");
+   response.sendRedirect("/");
    return;
   }
 
