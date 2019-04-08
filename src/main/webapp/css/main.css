@@ -16,10 +16,7 @@
 
 /* Prevent the page from becoming too wide. */
 body {
-  margin: 0;
-  background: linear-gradient(MistyRose, OldLace);
-  border-radius: 50%;
-  font-family: sans-serif;
+  background-color: thistle !important;
 }
 
 nav {
@@ -33,9 +30,21 @@ nav a {
   margin-right: 10px;
 }
 
+h1 {
+  font-family: 'Gill Sans';
+  color: white;
+  font-size: 50px;
+}
+
 h2 {
   margin: 0;
   background-color: #ccccff;
+}
+
+p {
+  font-family: 'Gill Sans';
+  color: white;
+  font-size: 20px;
 }
 
 input[type=submit] {

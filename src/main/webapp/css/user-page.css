@@ -31,7 +31,7 @@
 /* Add a bottom border to the message header. */
 .message-header {
   border-bottom: thin solid black;
-  background-image: linear-gradient(to right, white , #ccccff);
+  background-color: thistle !important;
 }
 
 /* Give the message body a margin so the text
