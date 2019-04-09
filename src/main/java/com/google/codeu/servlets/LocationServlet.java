@@ -29,9 +29,6 @@ public class LocationServlet extends HttpServlet {
         String name = request.getParameter("location-name");
         String description = request.getParameter("description");
 
-        //testing creation of location
-        System.out.println("Entity Creation");
-
         Location location = new Location(name, description, "", "");
         datastore.storeLocation(location);
 
