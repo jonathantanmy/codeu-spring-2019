@@ -26,8 +26,11 @@ public class LocationServlet extends HttpServlet {
                           HttpServletResponse response) throws ServletException, IOException {
 
         // read form fields
-        String name = request.getParameter("name-input");
-        String description = request.getParameter("description-input");
+        String name = request.getParameter("location-name");
+        String description = request.getParameter("description");
+
+        //testing creation of location
+        System.out.println("Entity Creation");
 
         Location location = new Location(name, description, "", "");
         datastore.storeLocation(location);
