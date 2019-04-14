@@ -16,15 +16,10 @@
 
 package com.google.codeu.data;
 
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.*;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.SortDirection;
-import com.google.appengine.api.datastore.FetchOptions;
-import java.nio.file.attribute.UserDefinedFileAttributeView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -58,14 +53,28 @@ public class Datastore {
 
     /** Stores the Location in Datastore. */
     public void storeLocation(Location location) {
+
         Entity locationEntity = new Entity("Location", location.getID().toString());
         locationEntity.setProperty("name", location.getName());
         locationEntity.setProperty("description", location.getDescription());
+        locationEntity.setProperty("imageUrl", location.getImageURL());
+        locationEntity.setProperty("imageLabels", location.getImageLabels());
+        locationEntity.setProperty("reviews", location.getReviews());
+        locationEntity.setProperty("idString", location.getID());
 
         datastore.put(locationEntity);
     }
 
-  /**
+    /** Retrieves Location Entity with specific id in Datastore. */
+    public Entity getLocation(String id) {
+
+        Query.Filter idFilter = new Query.FilterPredicate("idString", FilterOperator.EQUAL, id);
+        Query query = new Query("location").setFilter(idFilter);
+        PreparedQuery results = datastore.prepare(query);
+        return results.asSingleEntity();
+    }
+
+    /**
    * Gets messages addressed to a specific recipient.
    *
    * @return a list of messages where the user is the recipient instead of the author, or empty list if user has never posted a
