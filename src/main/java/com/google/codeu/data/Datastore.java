@@ -65,6 +65,25 @@ public class Datastore {
         datastore.put(locationEntity);
     }
 
+
+    /** Get the Locations from the Datastore */
+  public List<Location> getLocations() {
+      List<Location> locations = new ArrayList<>();
+
+      Query query =
+          new Query("Location")
+              .addSort("name", SortDirection.DESCENDING);
+      PreparedQuery results = datastore.prepare(query);
+
+      for (Entity entity : results.asIterable()) {
+          String name = (String) entity.getProperty("name");
+          readlocation(entity, locations, name);
+
+      }
+
+      return locations;
+    }
+
   /**
    * Gets messages addressed to a specific recipient.
    *
@@ -90,10 +109,10 @@ public class Datastore {
   }
 
   /**
-   * Fetches the messages for all users.
+   * Fetches the location for all users.
    *
-   * @return a list of messages posted by all users, or empty list if there are no messages. List
-   * is sorted by time descending.
+   * @return a list of locations posted by all users, or empty list if there are no locations. List
+   * is sorted by name descending.
    */
   public List<Message> getAllMessages(){
     List<Message> messages = new ArrayList<>();
@@ -103,7 +122,6 @@ public class Datastore {
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
-
         String user = (String) entity.getProperty("user");
         readMessage(entity, messages, user);
 
@@ -119,9 +137,26 @@ public class Datastore {
     return results.countEntities(FetchOptions.Builder.withLimit(1000));
   }
 
+  public void readLocation(Entity entity, List<Location> locations, String name) {
+    try {
+      String idString = entity.getKey().getName();
+      UUID id = UUID.fromString(idString);
+      String description = (String) entity.getProperty("description");
+      String imageUrl = (String) entity.getProperty("imageUrl");
+      String imageLabels = (String) entity.getProperty("imageLabels");
+      Location location = new Location (id,name,description,imageUrl, imageLabels);
+      locations.add(location);
+    } catch (Exception e) {
+      System.err.println("Error reading location.");
+      System.err.println(entity.toString());
+      e.printStackTrace();
+    }
+  }
+
   /* Helper function that encapsulates the redundant segments of the getMessages
    and getAllMessages functions; reads Messages.
    */
+
   public void readMessage(Entity entity, List<Message> messages, String user) {
     try {
       String idString = entity.getKey().getName();
