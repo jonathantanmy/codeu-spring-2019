@@ -30,5 +30,6 @@ public class LocationServlet extends HttpServlet {
 
         Location location = new Location(name, description, "", "");
         datastore.storeLocation(location);
+        
     }
 }
