@@ -3,6 +3,8 @@ import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Location;
 
 import java.io.IOException;
+import com.google.gson.Gson;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/location")
-public class LocationServlet extends HttpServlet {
+@WebServlet("/locations")
+public class LocationsServlet extends HttpServlet {
 
     private Datastore datastore;
 
@@ -22,17 +24,14 @@ public class LocationServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request,
+    protected void doGet(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
 
-        // read form fields
-        String name = request.getParameter("location-name");
-        String description = request.getParameter("description");
-        System.out.println(name+ description);
-        Location location = new Location(name, description, "default", "default");
-        datastore.storeLocation(location);
-        response.sendRedirect("/locationfeed.html ");
-
+        response.setContentType("application/json");
+        List<Location> locations = datastore.getLocations();
+        Gson gson = new Gson();
+        String json = gson.toJson(locations);
+        response.getOutputStream().println(json);
     }
 
 }

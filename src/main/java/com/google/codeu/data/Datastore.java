@@ -77,7 +77,7 @@ public class Datastore {
 
       for (Entity entity : results.asIterable()) {
           String name = (String) entity.getProperty("name");
-          readlocation(entity, locations, name);
+          readLocation(entity, locations, name);
 
       }
 
