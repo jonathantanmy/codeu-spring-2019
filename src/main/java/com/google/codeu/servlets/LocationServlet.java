@@ -1,8 +1,6 @@
 package com.google.codeu.servlets;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Location;
-import com.google.codeu.data.UserMarker;
-
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,5 +31,4 @@ public class LocationServlet extends HttpServlet {
         Location location = new Location(name, description, "", "");
         datastore.storeLocation(location);
     }
-
 }
