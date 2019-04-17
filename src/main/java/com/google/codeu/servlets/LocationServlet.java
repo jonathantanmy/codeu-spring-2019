@@ -32,19 +32,6 @@ public class LocationServlet extends HttpServlet {
     }
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        response.setContentType("application/json");
-
-        List<Location> locations = datastore.getLocations();
-        Gson gson = new Gson();
-
-        String json = gson.toJson(locations);
-
-        response.getWriter().println(json);
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
 
