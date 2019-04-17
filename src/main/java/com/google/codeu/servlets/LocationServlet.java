@@ -18,6 +18,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.gson.Gson;
+import java.util.List;
 
 
 @WebServlet("/location")
@@ -43,7 +45,7 @@ public class LocationServlet extends HttpServlet {
         String name = request.getParameter("location-name");
         String description = request.getParameter("description");
 
-        Location location = new Location(name, description, "", "");
+        Location location = new Location(name, description, "default", "default");
 
         if(blobKeys != null && !blobKeys.isEmpty()) {
             BlobKey blobKey = blobKeys.get(0);
@@ -59,7 +61,17 @@ public class LocationServlet extends HttpServlet {
         }
 
         datastore.storeLocation(location);
-
+        response.sendRedirect("/locationfeed.html");
     }
 
+      @Override
+      protected void doGet(HttpServletRequest request,
+                            HttpServletResponse response) throws ServletException, IOException {
+
+          response.setContentType("application/json");
+          List<Location> locations = datastore.getLocations();
+          Gson gson = new Gson();
+          String json = gson.toJson(locations);
+          response.getOutputStream().println(json);
+      }
 }

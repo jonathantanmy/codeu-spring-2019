@@ -69,6 +69,24 @@ public class Datastore {
         datastore.put(locationEntity);
     }
 
+/** Get the Locations from the Datastore */
+  public List<Location> getLocations() {
+      List<Location> locations = new ArrayList<>();
+
+      Query query =
+          new Query("Location")
+              .addSort("name", SortDirection.DESCENDING);
+      PreparedQuery results = datastore.prepare(query);
+
+      for (Entity entity : results.asIterable()) {
+          String name = (String) entity.getProperty("name");
+          readLocation(entity, locations, name);
+
+      }
+
+      return locations;
+    }
+
   /**
    * Gets messages addressed to a specific recipient.
    *
@@ -121,6 +139,22 @@ public class Datastore {
     Query query = new Query("Message");
     PreparedQuery results = datastore.prepare(query);
     return results.countEntities(FetchOptions.Builder.withLimit(1000));
+  }
+
+  public void readLocation(Entity entity, List<Location> locations, String name) {
+    try {
+      String idString = entity.getKey().getName();
+      UUID id = UUID.fromString(idString);
+      String description = (String) entity.getProperty("description");
+      String imageUrl = (String) entity.getProperty("imageUrl");
+      String imageLabels = (String) entity.getProperty("imageLabels");
+      Location location = new Location (id,name,description,imageUrl, imageLabels);
+      locations.add(location);
+    } catch (Exception e) {
+      System.err.println("Error reading location.");
+      System.err.println(entity.toString());
+      e.printStackTrace();
+    }
   }
 
   /* Helper function that encapsulates the redundant segments of the getMessages
