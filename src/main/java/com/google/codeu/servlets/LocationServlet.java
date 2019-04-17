@@ -52,14 +52,6 @@ public class LocationServlet extends HttpServlet {
         Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
         List<BlobKey> blobKeys = blobs.get("image");
 
-        /*
-        if (blobKeys == null || blobKeys.isEmpty()) {
-            response.sendRedirect("/");
-        } else {
-            response.sendRedirect("/serve?blob-key=" + blobKeys.get(0).getKeyString());
-        }
-        */
-
         // read form fields
         String name = request.getParameter("location-name");
         String description = request.getParameter("description");

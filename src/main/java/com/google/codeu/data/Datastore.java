@@ -76,9 +76,7 @@ public class Datastore {
         PreparedQuery results = datastore.prepare(query);
 
         for (Entity entity : results.asIterable()) {
-
             readLocation(entity, locations);
-
         }
 
         return locations;
