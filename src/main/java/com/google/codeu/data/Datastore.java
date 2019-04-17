@@ -110,8 +110,8 @@ public class Datastore {
   /**
    * Fetches the messages for all users.
    *
-   * @return a list of locations posted by all users, or empty list if there are no locations. List
-   * is sorted by name descending.
+   * @return a list of messages posted by all users, or empty list if there are no messages. List
+   * is sorted by time descending.
    */
   public List<Message> getAllMessages(){
     List<Message> messages = new ArrayList<>();
@@ -121,7 +121,7 @@ public class Datastore {
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
-      
+
         String user = (String) entity.getProperty("user");
         readMessage(entity, messages, user);
 

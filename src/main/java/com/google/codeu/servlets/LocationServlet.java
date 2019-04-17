@@ -17,6 +17,7 @@ public class LocationServlet extends HttpServlet {
 
     private Datastore datastore;
 
+
     @Override
     public void init() {
         datastore = new Datastore();
@@ -29,11 +30,11 @@ public class LocationServlet extends HttpServlet {
         // read form fields
         String name = request.getParameter("location-name");
         String description = request.getParameter("description");
-        System.out.println(name+ description);
+
         Location location = new Location(name, description, "default", "default");
         datastore.storeLocation(location);
-        response.sendRedirect("/locationfeed.html ");
-      }
+        response.sendRedirect("/locationfeed.html");
+    }
 
       @Override
       protected void doGet(HttpServletRequest request,
