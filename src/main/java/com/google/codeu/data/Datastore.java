@@ -69,6 +69,35 @@ public class Datastore {
         datastore.put(locationEntity);
     }
 
+    public List<Location> getLocations() {
+        List<Location> locations = new ArrayList<>();
+        Query query =
+                new Query("Location");
+        PreparedQuery results = datastore.prepare(query);
+
+        for (Entity entity : results.asIterable()) {
+
+            readLocation(entity, locations);
+
+        }
+
+        return locations;
+    }
+
+    public void readLocation(Entity entity, List<Location> locations) {
+        try {
+            String name = (String) entity.getProperty("name");
+            String description = (String) entity.getProperty("description");
+            String imageUrl = (String) entity.getProperty("imageUrl");
+            Location location = new Location(name, description, imageUrl, "");
+            locations.add(location);
+        } catch (Exception e) {
+            System.err.println("Error reading message.");
+            System.err.println(entity.toString());
+            e.printStackTrace();
+        }
+    }
+
   /**
    * Gets messages addressed to a specific recipient.
    *

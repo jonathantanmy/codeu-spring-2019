@@ -8,6 +8,9 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.ServingUrlOptions;
+import com.google.codeu.data.Message;
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -30,12 +33,31 @@ public class LocationServlet extends HttpServlet {
     }
 
     @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        response.setContentType("application/json");
+
+        List<Location> locations = datastore.getLocations();
+        Gson gson = new Gson();
+
+        String json = gson.toJson(locations);
+
+        response.getWriter().println(json);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
 
         BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
         Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
         List<BlobKey> blobKeys = blobs.get("image");
+
+        if (blobKeys == null || blobKeys.isEmpty()) {
+            response.sendRedirect("/");
+        } else {
+            response.sendRedirect("/serve?blob-key=" + blobKeys.get(0).getKeyString());
+        }
 
         // read form fields
         String name = request.getParameter("location-name");
