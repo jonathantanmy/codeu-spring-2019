@@ -1,9 +1,9 @@
 package com.google.codeu.servlets;
 
+import com.google.appengine.api.datastore.Entity;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Location;
 
-import com.google.appengine.api.datastore.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 
 @WebServlet("/review")
 public class ReviewServlet extends HttpServlet {
@@ -31,7 +31,7 @@ public class ReviewServlet extends HttpServlet {
 
         // location being reviewed
         Entity location = datastore.getLocation(""); // Argument to be changed upon creation of Location Feed
-        List<Location.Review> reviews = (List<Location.Review>) location.getProperty("reviews");
+        Collection<Location.Review> reviews = (Collection<Location.Review>) location.getProperty("reviews");
 
         // create a new review based on the form inputs
         String title = request.getParameter("title");
@@ -43,7 +43,7 @@ public class ReviewServlet extends HttpServlet {
         location.setProperty("reviews", reviews);
 
         // Print the updated list of reviews
-        List<Location.Review> allReviews = (List<Location.Review>) location.getProperty("reviews");
+        Collection<Location.Review> allReviews = (Collection<Location.Review>) location.getProperty("reviews");
         for (Location.Review rev: allReviews) {
             System.out.println(rev.title);
             System.out.println(rev.body);

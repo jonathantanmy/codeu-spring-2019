@@ -1,6 +1,6 @@
 package com.google.codeu.data;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.UUID;
 
 public class Location {
@@ -9,7 +9,7 @@ public class Location {
     public String imageUrl;
     public String imageLabels;
     private String id;
-    public List<Review> reviews;
+    public Collection<Review> reviews;
 
     // Helper class to hold reviews.
     public static class Review {
@@ -55,17 +55,17 @@ public class Location {
     }
 
 
-    // removes a review from a list
+    // removes a review from a collection
     public void deleteReview(Review review) {
         reviews.remove(review);
     }
 
-    // removes all reviews from a list
+    // removes all reviews from a collection
     public  void deleteAllReviews(Review review) {
         reviews.clear();
     }
 
     // Returns all reviews
-    public List<Review> getReviews() { return reviews; }
+    public Collection<Review> getReviews() { return reviews; }
 
 }
