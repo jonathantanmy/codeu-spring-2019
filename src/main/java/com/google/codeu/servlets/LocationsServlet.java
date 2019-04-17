@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/locations")
+@WebServlet("/location")
 public class LocationsServlet extends HttpServlet {
 
     private Datastore datastore;

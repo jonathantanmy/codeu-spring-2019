@@ -65,8 +65,7 @@ public class Datastore {
         datastore.put(locationEntity);
     }
 
-
-    /** Get the Locations from the Datastore */
+/** Get the Locations from the Datastore */
   public List<Location> getLocations() {
       List<Location> locations = new ArrayList<>();
 

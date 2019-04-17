@@ -15,7 +15,6 @@ public class LocationServlet extends HttpServlet {
 
     private Datastore datastore;
 
-
     @Override
     public void init() {
         datastore = new Datastore();
