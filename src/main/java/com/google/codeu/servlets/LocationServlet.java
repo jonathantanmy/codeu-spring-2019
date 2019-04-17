@@ -1,8 +1,18 @@
 package com.google.codeu.servlets;
+import com.google.appengine.api.blobstore.*;
+import com.google.appengine.api.images.ImagesServiceFailureException;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Location;
 
+import com.google.appengine.api.images.ImagesService;
+import com.google.appengine.api.images.ImagesServiceFactory;
+import com.google.appengine.api.images.ServingUrlOptions;
+import com.google.codeu.data.Message;
+import com.google.gson.Gson;
+
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,11 +37,29 @@ public class LocationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
 
+        BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+        Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
+        List<BlobKey> blobKeys = blobs.get("image");
+
         // read form fields
         String name = request.getParameter("location-name");
         String description = request.getParameter("description");
 
         Location location = new Location(name, description, "default", "default");
+
+        if(blobKeys != null && !blobKeys.isEmpty()) {
+            BlobKey blobKey = blobKeys.get(0);
+            ImagesService imagesService = ImagesServiceFactory.getImagesService();
+            ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
+            try {
+                String imageUrl = imagesService.getServingUrl(options);
+                location.setImageUrl(imageUrl);
+            } catch (ImagesServiceFailureException imageUrlc) {
+                System.out.println("Error.");
+            }
+
+        }
+
         datastore.storeLocation(location);
         response.sendRedirect("/locationfeed.html");
     }

@@ -29,6 +29,10 @@ public class Location {
         return description;
     }
 
+    public String getImageUrl() { return imageUrl; }
+
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
     public UUID getID() {
         return id;
     }
