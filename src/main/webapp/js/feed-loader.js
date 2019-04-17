@@ -50,7 +50,7 @@
 
   // Fetch messages and add them to the page.
   function fetchLocations(){
-    const url = '/locations';
+    const url = '/location';
     fetch(url).then((response) => {
       console.log(response);
       return response.json();

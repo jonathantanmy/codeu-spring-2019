@@ -108,7 +108,7 @@ public class Datastore {
   }
 
   /**
-   * Fetches the location for all users.
+   * Fetches the messages for all users.
    *
    * @return a list of locations posted by all users, or empty list if there are no locations. List
    * is sorted by name descending.
@@ -121,6 +121,7 @@ public class Datastore {
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
+      
         String user = (String) entity.getProperty("user");
         readMessage(entity, messages, user);
 
@@ -155,7 +156,6 @@ public class Datastore {
   /* Helper function that encapsulates the redundant segments of the getMessages
    and getAllMessages functions; reads Messages.
    */
-
   public void readMessage(Entity entity, List<Message> messages, String user) {
     try {
       String idString = entity.getKey().getName();
