@@ -1,10 +1,9 @@
 package com.google.codeu.servlets;
+import com.google.appengine.api.blobstore.*;
+import com.google.appengine.api.images.ImagesServiceFailureException;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Location;
 
-import com.google.appengine.api.blobstore.BlobKey;
-import com.google.appengine.api.blobstore.BlobstoreService;
-import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.ServingUrlOptions;
@@ -53,11 +52,13 @@ public class LocationServlet extends HttpServlet {
         Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(request);
         List<BlobKey> blobKeys = blobs.get("image");
 
+        /*
         if (blobKeys == null || blobKeys.isEmpty()) {
             response.sendRedirect("/");
         } else {
             response.sendRedirect("/serve?blob-key=" + blobKeys.get(0).getKeyString());
         }
+        */
 
         // read form fields
         String name = request.getParameter("location-name");
@@ -69,8 +70,13 @@ public class LocationServlet extends HttpServlet {
             BlobKey blobKey = blobKeys.get(0);
             ImagesService imagesService = ImagesServiceFactory.getImagesService();
             ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
-            String imageUrl = imagesService.getServingUrl(options);
-            location.setImageUrl(imageUrl);
+            try {
+                String imageUrl = imagesService.getServingUrl(options);
+                location.setImageUrl(imageUrl);
+            } catch (ImagesServiceFailureException imageUrlc) {
+                System.out.println("Error.");
+            }
+
         }
 
         datastore.storeLocation(location);

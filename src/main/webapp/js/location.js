@@ -9,3 +9,7 @@ function fetchLocationImageUploadUrlAndShowForm() {
         locationForm.classList.remove('hidden');
       });
 }
+
+function buildUI() {
+  fetchLocationImageUploadUrlAndShowForm();
+}
