@@ -61,7 +61,7 @@ public class Datastore {
         Entity locationEntity = new Entity("Location", location.getID().toString());
         locationEntity.setProperty("name", location.getName());
         locationEntity.setProperty("description", location.getDescription());
-
+        
         if(location.getImageUrl() != null) {
             locationEntity.setProperty("imageUrl", location.getImageUrl());
         }
