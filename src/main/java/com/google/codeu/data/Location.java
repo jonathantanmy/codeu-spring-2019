@@ -1,21 +1,19 @@
 package com.google.codeu.data;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.UUID;
 
 public class Location {
-    public String name;
-    public String description;
-    public String imageUrl;
-    public String imageLabels;
-    private String id;
+    private String name;
+    private String description;
+    private String imageUrl;
+    private String imageLabels;
+    private UUID id;
 
     public Location(String name, String description, String imageUrl, String imageLabels) {
         this(UUID.randomUUID(),name, description, imageUrl, imageLabels);
     }
     public Location(UUID uuid, String name, String description, String imageUrl, String imageLabels) {
-        this.id= uuid.toString();
+        this.id= uuid;
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
@@ -30,7 +28,7 @@ public class Location {
         return description;
     }
 
-    public String getID() {
+    public UUID getID() {
         return id;
     }
 

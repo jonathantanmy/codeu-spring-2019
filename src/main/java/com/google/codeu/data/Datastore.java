@@ -26,7 +26,6 @@ import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.SortDirection;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -59,12 +58,11 @@ public class Datastore {
 
     /** Stores the Location in Datastore. */
     public void storeLocation(Location location) {
-        Entity locationEntity = new Entity("Location", location.getID());
+        Entity locationEntity = new Entity("Location");
         locationEntity.setProperty("name", location.getName());
         locationEntity.setProperty("description", location.getDescription());
         locationEntity.setProperty("imageUrl", location.getImageURL());
         locationEntity.setProperty("imageLabels", location.getImageLabels());
-        locationEntity.setProperty("idString", location.getID());
 
         datastore.put(locationEntity);
     }
