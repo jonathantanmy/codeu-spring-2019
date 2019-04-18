@@ -26,6 +26,7 @@ import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.SortDirection;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -63,7 +64,6 @@ public class Datastore {
         locationEntity.setProperty("description", location.getDescription());
         locationEntity.setProperty("imageUrl", location.getImageURL());
         locationEntity.setProperty("imageLabels", location.getImageLabels());
-        locationEntity.setProperty("reviews", location.getReviews());
         locationEntity.setProperty("idString", location.getID());
 
         datastore.put(locationEntity);
@@ -213,4 +213,12 @@ public class Datastore {
     markerEntity.setProperty("content", marker.getContent());
     datastore.put(markerEntity);
   }
+
+  public void storeReview(Review review) {
+     Entity reviewEntity = new Entity("Review");
+     reviewEntity.setProperty("title", review.title);
+     reviewEntity.setProperty("body", review.body);
+     datastore.put(reviewEntity);
+  }
+
 }
