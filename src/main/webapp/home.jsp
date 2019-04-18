@@ -30,6 +30,10 @@
               <li class="nav-item">
                   <a class="nav-link" href="stats.html">Stats</a>
                 </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="location-form.html">Location Form</a>
+                </li>
+
                 <%
                 if (isUserLoggedIn) {
                   String username = (String) request.getAttribute("username");
@@ -43,7 +47,7 @@
           </div>
         </nav>
       </div>
-  
+
     <h1>CodeU Starter Project</h1>
     <p>Hello everyone. We are CodeU Team 27.This is the CodeU starter project. Click the links above to login and visit your page.
     You can post messages on your page, and you can visit other user pages if you have
