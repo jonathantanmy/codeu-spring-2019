@@ -58,7 +58,7 @@ public class Datastore {
 
     /** Stores the Location in Datastore. */
     public void storeLocation(Location location) {
-        Entity locationEntity = new Entity("Location", location.getID().toString());
+        Entity locationEntity = new Entity("Location", location.getID());
         locationEntity.setProperty("name", location.getName());
         locationEntity.setProperty("description", location.getDescription());
         locationEntity.setProperty("imageUrl", location.getImageURL());
