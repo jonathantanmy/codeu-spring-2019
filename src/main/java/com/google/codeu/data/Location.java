@@ -5,10 +5,9 @@ import java.util.UUID;
 public class Location {
     public String name;
     public String description;
-    public Double lat;
-    public Double lng;
+    private Double lat;
+    private Double lng;
     private String imageUrl;
-    
     private String imageLabels;
     private UUID id;
 
