@@ -44,8 +44,10 @@ public class LocationServlet extends HttpServlet {
         // read form fields
         String name = request.getParameter("location-name");
         String description = request.getParameter("description");
+        Double lat = Double.parseDouble(request.getParameter("lat"));
+        Double lng = Double.parseDouble(request.getParameter("lng"));
 
-        Location location = new Location(name, description, "default", "default");
+        Location location = new Location(name, description, lat, lng, "default", "default");
 
         if(blobKeys != null && !blobKeys.isEmpty()) {
             BlobKey blobKey = blobKeys.get(0);

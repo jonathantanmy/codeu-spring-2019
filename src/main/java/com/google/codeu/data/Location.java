@@ -5,18 +5,23 @@ import java.util.UUID;
 public class Location {
     public String name;
     public String description;
+    public Double lat;
+    public Double lng;
     private String imageUrl;
+    
     private String imageLabels;
     private UUID id;
 
 
-    public Location(String name, String description, String imageUrl, String imageLabels) {
-        this(UUID.randomUUID(),name, description, imageUrl, imageLabels);
+    public Location(String name, String description, Double lat, Double lng, String imageUrl, String imageLabels) {
+        this(UUID.randomUUID(),name, description, lat, lng, imageUrl, imageLabels);
     }
-    public Location(UUID uuid, String name, String description, String imageUrl, String imageLabels) {
+    public Location(UUID uuid, String name, String description, Double lat, Double lng, String imageUrl, String imageLabels) {
         this.id= uuid;
         this.name = name;
         this.description = description;
+        this.lat = lat;
+        this.lng = lng;
         this.imageUrl = imageUrl;
         this.imageLabels = imageLabels;
     }
@@ -35,6 +40,12 @@ public class Location {
 
     public UUID getID() {
         return id;
+    }
+    public Double getLat() {
+        return lat;
+    }
+    public Double getLng() {
+        return lng;
     }
 
 
