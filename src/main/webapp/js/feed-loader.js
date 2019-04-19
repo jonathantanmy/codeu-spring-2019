@@ -85,12 +85,16 @@
 
    const bodyDiv = document.createElement('div');
    bodyDiv.classList.add('message-body');
-   bodyDiv.appendChild(document.createTextNode("Image Url: " +location.imageUrl));
 
    const messageDiv = document.createElement('div');
    messageDiv.classList.add("message-div");
    messageDiv.appendChild(headerDiv);
    messageDiv.appendChild(bodyDiv);
+
+   if(location.imageUrl){
+       bodyDiv.innerHTML += '<br/>';
+       bodyDiv.innerHTML += '<img src="' + location.imageUrl + '" />';
+   }
 
    return messageDiv;
   }
