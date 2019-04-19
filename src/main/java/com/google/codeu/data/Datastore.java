@@ -19,12 +19,12 @@ package com.google.codeu.data;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.SortDirection;
-import com.google.appengine.api.datastore.FetchOptions;
-import java.nio.file.attribute.UserDefinedFileAttributeView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -238,4 +238,12 @@ public class Datastore {
     markerEntity.setProperty("content", marker.getContent());
     datastore.put(markerEntity);
   }
+
+  public void storeReview(Review review) {
+     Entity reviewEntity = new Entity("Review");
+     reviewEntity.setProperty("title", review.title);
+     reviewEntity.setProperty("body", review.body);
+     datastore.put(reviewEntity);
+  }
+
 }
