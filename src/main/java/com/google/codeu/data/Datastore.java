@@ -58,14 +58,36 @@ public class Datastore {
 
     /** Stores the Location in Datastore. */
     public void storeLocation(Location location) {
-        Entity locationEntity = new Entity("Location");
+        Entity locationEntity = new Entity("Location", location.getID().toString());
         locationEntity.setProperty("name", location.getName());
         locationEntity.setProperty("description", location.getDescription());
+        
+        if(location.getImageUrl() != null) {
+            locationEntity.setProperty("imageUrl", location.getImageUrl());
+        }
 
         datastore.put(locationEntity);
     }
 
-    /**
+/** Get the Locations from the Datastore */
+  public List<Location> getLocations() {
+      List<Location> locations = new ArrayList<>();
+
+      Query query =
+          new Query("Location")
+              .addSort("name", SortDirection.DESCENDING);
+      PreparedQuery results = datastore.prepare(query);
+
+      for (Entity entity : results.asIterable()) {
+          String name = (String) entity.getProperty("name");
+          readLocation(entity, locations, name);
+
+      }
+
+      return locations;
+    }
+
+  /**
    * Gets messages addressed to a specific recipient.
    *
    * @return a list of messages where the user is the recipient instead of the author, or empty list if user has never posted a
@@ -117,6 +139,22 @@ public class Datastore {
     Query query = new Query("Message");
     PreparedQuery results = datastore.prepare(query);
     return results.countEntities(FetchOptions.Builder.withLimit(1000));
+  }
+
+  public void readLocation(Entity entity, List<Location> locations, String name) {
+    try {
+      String idString = entity.getKey().getName();
+      UUID id = UUID.fromString(idString);
+      String description = (String) entity.getProperty("description");
+      String imageUrl = (String) entity.getProperty("imageUrl");
+      String imageLabels = (String) entity.getProperty("imageLabels");
+      Location location = new Location (id,name,description,imageUrl, imageLabels);
+      locations.add(location);
+    } catch (Exception e) {
+      System.err.println("Error reading location.");
+      System.err.println(entity.toString());
+      e.printStackTrace();
+    }
   }
 
   /* Helper function that encapsulates the redundant segments of the getMessages
