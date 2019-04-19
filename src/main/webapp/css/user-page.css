@@ -34,7 +34,7 @@ p {
 /* Add a bottom border to the message header. */
 .message-header {
   border-bottom: thin solid black;
-  background-color: thistle !important;
+  background-color: #FFFAF0 !important;
 }
 
 /* Give the message body a margin so the text
