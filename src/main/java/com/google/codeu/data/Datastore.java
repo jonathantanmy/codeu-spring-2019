@@ -17,10 +17,10 @@
 package com.google.codeu.data;
 
 import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.SortDirection;
@@ -61,19 +61,8 @@ public class Datastore {
         Entity locationEntity = new Entity("Location");
         locationEntity.setProperty("name", location.getName());
         locationEntity.setProperty("description", location.getDescription());
-        locationEntity.setProperty("imageUrl", location.getImageURL());
-        locationEntity.setProperty("imageLabels", location.getImageLabels());
 
         datastore.put(locationEntity);
-    }
-
-    /** Retrieves Location Entity with specific id in Datastore. */
-    public Entity getLocation(String id) {
-
-        Query.Filter idFilter = new Query.FilterPredicate("idString", FilterOperator.EQUAL, id);
-        Query query = new Query("location").setFilter(idFilter);
-        PreparedQuery results = datastore.prepare(query);
-        return results.asSingleEntity();
     }
 
     /**

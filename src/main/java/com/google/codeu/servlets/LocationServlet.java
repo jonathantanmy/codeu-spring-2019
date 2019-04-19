@@ -29,7 +29,7 @@ public class LocationServlet extends HttpServlet {
         String name = request.getParameter("location-name");
         String description = request.getParameter("description");
 
-        Location location = new Location(name, description, "", "");
+        Location location = new Location(name, description);
         datastore.storeLocation(location);
 
     }
