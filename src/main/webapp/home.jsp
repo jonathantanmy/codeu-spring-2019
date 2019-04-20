@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>CodeU Starter Project</title>
+    <title>PhotoOp HotSpots</title>
     <link rel="stylesheet" href="/css/main.css">
     <script src="/js/navigation-loader.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -14,44 +14,56 @@
   </head>
   <body>
     <%-- <body onload="addLoginOrLogoutLinkToNavigation();"> --%>
-      <div id=nav>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="map.html">Map</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="stats.html">Stats</a>
-                </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="location-form.html">Location Form</a>
-                </li>
+      <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto">
+          <div class="inner">
+            <h3 class="masthead-brand">PhotoOp HotSpots</h3>
+            <nav class="nav nav-masthead justify-content-center">
+              <a class="nav-link active" href="#">Home</a>
+              <a class="nav-link" href="location-form.html">Location Form</a>
+              <a class="nav-link" href="map.html">Map</a>
 
-                <%
-                if (isUserLoggedIn) {
-                  String username = (String) request.getAttribute("username");
-              %>
-                  <li><a href="/user-page.html?user=<%= username %>">Your Page</a></li>
-                  <li><a href="/logout">Logout</a></li>
-              <% } else {   %>
-                <li><a href="/login">Login</a></li>
-              <% } %>
-            </ul>
+              <%
+              if (isUserLoggedIn) {
+                String username = (String) request.getAttribute("username");
+            %>  
+              
+              <a class="nav-link" href="/user-page.html?user=<%= username %>">Your Page</a>
+              
+             
+              <a class="nav-link" href="/logout">Logout</a>
+              
+                
+            <% } else {   %>
+              <li class="nav-item">
+                <li><a class="nav-link" href="/login">Login</a></li>
+              </li>
+            <% } %>
+            </nav>
           </div>
-        </nav>
+        </header>
+    <main role="main" class="inner cover">
+    <h1 class="cover-heading">PhotoOp HotSpots</h1>
+    <div class="row">
+      <div class="column">
+        <img src="images/dubai.jpeg" alt= "Temple" style="width: 100%">
       </div>
-
-    <h1>CodeU Starter Project</h1>
-    <p>Hello everyone. We are CodeU Team 27.This is the CodeU starter project. Click the links above to login and visit your page.
-    You can post messages on your page, and you can visit other user pages if you have
-    their URL.</p>
-    <p>Try to explore our website.</p>
+      <div class="column">
+        <img src="images/cafe.jpg" alt="Cafe" style="width:100%">
+      </div>
+      <div class="column">
+        <img src="images/cancun.jpeg" alt="Cancun" style="width:100%">
+      </div>
+    </div>
+    
+    <p class="lead">Welcome to PhotoOp HotSpots! We built this project hoping to create a community that
+      can help travelers around the world find the best photo opportunities. Whether the photo spot you are looking 
+      for is an iconic landmark or a hip coffee shop, we can help you find the best locations. Add your favorite spots and discover 
+      where other user's favorite spots are. 
+    </p>
+    <p class="lead">
+      <a href="about.html" class="btn btn-outline-warning">About Us</a>
+    </p>
+  </main>
   </body>
 </html>
