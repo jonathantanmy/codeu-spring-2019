@@ -6,3 +6,65 @@
     margin-right: auto;
     text-align: center; 
 }
+.masthead {
+    margin-bottom: 2rem;
+  }
+  
+.masthead-brand {
+margin-bottom: 0;
+color:#F56040
+}
+.form {
+    margin:0 auto; /* this will center the page */
+    width:500px; /*  use your width here */
+ }
+.nav-masthead .nav-link {
+padding: .25rem 0;
+font-weight: 700;
+color: #F77737;
+background-color: transparent;
+border-bottom: .25rem solid transparent;
+}
+.nav-masthead .nav-link + .nav-link {
+    margin-left: 2rem;
+  }
+  
+.nav-masthead .active {
+color:  #FCAF45;
+border-bottom-color: #FFDC80;
+}
+
+h1 {
+  font-family: 'Gill Sans';
+  font-size: 35px;
+  text-align: center
+}
+
+html,
+body {
+  height: 34%;
+  background-color: #FFFAF0;
+} 
+h2 {
+  margin: 0;
+  background-color:#FFF;
+}
+
+p {
+  font-family: 'Gill Sans';
+  color: black;
+  font-size: 20px;
+}
+
+input[type=submit] {
+  background-color: #ccccff;
+  height: 50px;
+  width: 100px;
+  font-size: 14pt;
+}
+
+#content {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}

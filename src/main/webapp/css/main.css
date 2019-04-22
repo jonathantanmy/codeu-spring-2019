@@ -40,7 +40,7 @@ a:hover {
 
 html,
 body {
-  height: 38%;
+  height: 32%;
   background-color: #FFFAF0;
 } 
 body {
@@ -48,12 +48,16 @@ body {
   display: flex;
   color: rgb(66, 65, 65);
 }
+h1 {
+  text-align: center
+}
 
 /*
  * Header
  */
 .masthead {
   margin-bottom: 2rem;
+  
 }
 
 .masthead-brand {
