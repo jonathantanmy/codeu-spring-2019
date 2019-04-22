@@ -35,9 +35,9 @@
               
                 
             <% } else {   %>
-              <li class="nav-item">
-                <li><a class="nav-link" href="/login">Login</a></li>
-              </li>
+              
+              <a class="nav-link" href="/login">  Login</a>
+             
             <% } %>
             </nav>
           </div>
