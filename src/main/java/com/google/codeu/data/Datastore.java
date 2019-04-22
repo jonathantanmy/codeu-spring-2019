@@ -61,7 +61,8 @@ public class Datastore {
         Entity locationEntity = new Entity("Location", location.getID().toString());
         locationEntity.setProperty("name", location.getName());
         locationEntity.setProperty("description", location.getDescription());
-        
+        locationEntity.setProperty("lat",location.getLat());
+        locationEntity.setProperty("lng",location.getLng());
         if(location.getImageUrl() != null) {
             locationEntity.setProperty("imageUrl", location.getImageUrl());
         }
@@ -148,7 +149,9 @@ public class Datastore {
       String description = (String) entity.getProperty("description");
       String imageUrl = (String) entity.getProperty("imageUrl");
       String imageLabels = (String) entity.getProperty("imageLabels");
-      Location location = new Location (id,name,description,imageUrl, imageLabels);
+      Double lat = (Double) entity.getProperty("lat");
+      Double lng = (Double) entity.getProperty("lng");
+      Location location = new Location (id,name,description,lat, lng, imageUrl, imageLabels);
       locations.add(location);
     } catch (Exception e) {
       System.err.println("Error reading location.");

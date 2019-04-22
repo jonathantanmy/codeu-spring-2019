@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>About</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/about.css">
     <script src="/js/navigation-loader.js"></script>
     <script src="/js/navigation-loader.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -12,26 +12,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body onload="addLoginOrLogoutLinkToNavigation();">
-    <div id=nav>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="about.html">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="map.html">Map</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="stats.html">Stats</a>
-                </li>
-            </ul>
-          </div>
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+      <div class="inner">
+        <h3 class="masthead-brand">PhotoOp HotSpots</h3>
+        <nav class="nav nav-masthead justify-content-center">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link active" href="about.html">About</a>
+          <a class="nav-link" href="location-form.html">Location Form</a>
+          <a class="nav-link" href="map.html">Map</a>
         </nav>
-    </div>
+      </div>
+    </header>
     <h1>Welcome to CodeU Team 27's Project!</h1>
     <p>Messages from the Team: </p>
     <p>Elaine Liu - Hi! I'm from Long Island, NY and I'm currently a sophomore majoring in Computer Science
