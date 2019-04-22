@@ -12,8 +12,18 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbpaCzxVuhKdW9to2hRjLcYfp8qrYzbqk&libraries=places&callback=initAutocomplete" async defer></script>
 </head>
 <body onload="buildUI();createMap();">
-
-<div class="padded rounded panel centered">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto">
+            <div class="inner">
+            <h3 class="masthead-brand">PhotoOp HotSpots</h3>
+            <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="about.html">About</a>
+                <a class="nav-link active" href="location-form.html">Location Form</a>
+                <a class="nav-link" href="map.html">Map</a>
+            </nav>
+    </div>
+<div class="panel-centered">
     <h1 id="page-title">Location Form</h1>
     <br>
     <br>
@@ -25,23 +35,25 @@
       <input name="location-name" type="location-name" class="form-control" id="location-name" aria-describedby="locationHelp" placeholder="Location Name">
     </div>
     <div class="form-group">
+            <label for="autocomplete">Enter the address</label>
+            <input name="autocomplete" type="text" class="form-control" id="autocomplete" placeholder="Enter the address">
+    </div>
+
+    <div class="form-group">
       <label for="description">Enter a description</label>
       <input name="description" type="description" class="form-control" id="description" placeholder="Location Description">
     </div>
-    Autocomplete text box:
-    <input id="autocomplete"
-        placeholder="Enter your address"
-        type="text"/>
     <div id="map"></div>
-    Latitude is
-        <input name="lat" id="lat">
-    Longitude is
-        <input name="lng" id="lng">
+
+        <type="hidden" input name="lat" id="lat">
+ 
+        <type="hidden" input name="lng" id="lng"  >
     <br>
     <div class="form-group">
         <label for="imageFile">Add an image to your Location</label>
         <input type="file" name= "image" class="image" id="imageFile">
         <input type = "hidden" value = "" name = "recipient" id = "recipientInput">
+        <br>
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
     <br/>

@@ -40,13 +40,16 @@ a:hover {
 
 html,
 body {
-  height: 38%;
+  height: 32%;
   background-color: #FFFAF0;
 } 
 body {
   display: -ms-flexbox;
   display: flex;
   color: rgb(66, 65, 65);
+}
+h1 {
+  text-align: center
 }
 
 /*

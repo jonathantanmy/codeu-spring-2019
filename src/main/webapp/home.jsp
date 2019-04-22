@@ -21,7 +21,7 @@
             <nav class="nav nav-masthead justify-content-center">
               <a class="nav-link active" href="#">Home</a>
               <a class="nav-link" href="location-form.html">Location Form</a>
-              <a class="nav-link" href="map.html">Map</a>
+              <a class="nav-link" href="locationfeed.html">Location Feed</a>
 
               <%
               if (isUserLoggedIn) {
