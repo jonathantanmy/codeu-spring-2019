@@ -20,6 +20,7 @@
             <h3 class="masthead-brand">PhotoOp HotSpots</h3>
             <nav class="nav nav-masthead justify-content-center">
               <a class="nav-link active" href="#">Home</a>
+              <a class="nav-link" href="about.html">About</a>
               <a class="nav-link" href="location-form.html">Location Form</a>
               <a class="nav-link" href="locationfeed.html">Location Feed</a>
 
