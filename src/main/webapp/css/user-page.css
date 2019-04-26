@@ -14,63 +14,89 @@
  * limitations under the License.
  */
 
-/* Set the size of the message input to be 100 pixels high
-   and will fill the width of its parent element. */
-#message-input {
-  height: 100px;
-  width: 99%;
-  color:black !important;
+/* Prevent the page from becoming too wide. */
+/*
+ * Globals
+ */
+
+/* Links */
+a,
+a:focus,
+a:hover {
+  color: #FFDC80;
 }
 
-/* Give each message a rounded border. */
-/* .message-div {
-  border: thin solid black;
-  border-radius: 5px;
-  margin-top: 20px;
-} */
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #FFDC80;
+  background-color: #F77737;
+  border: .05rem solid #fff;
+}
+/*
+ * Base structure
+ */
+
+html,
+body {
+  height: 32%;
+  background-color: #FFFAF0;
+} 
+body {
+  display: -ms-flexbox;
+  display: flex;
+  color: rgb(66, 65, 65);
+}
+h1 {
+  text-align: center
+}
+
+/*
+ * Header
+ */
+.masthead {
+  margin-bottom: 2rem;
+}
+
+.masthead-brand {
+  margin-bottom: 0;
+  color:#F56040
+}
+
+.nav-masthead .nav-link {
+  padding: .25rem 0;
+  font-weight: 700;
+  color: #F77737;
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 2rem;
+}
+
+.nav-masthead .active {
+  color:  #FCAF45;
+  border-bottom-color: #FFDC80;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 33.33%;
+  padding: 5px;
+}
+
 p {
-  color: black !important;
-}
-/* Add a bottom border to the message header. */
-.message-header {
-  border-bottom: thin solid black;
-  background-color: #FFFAF0 !important;
-}
-
-/* Give the message body a margin so the text
-   isn't too close to the border. */
-.message-body {
-  font: 12pt;
-}
-
-.panel {
-  background-color: white;
-  margin-top: 20px;
-}
-
-/* Restrict the size of images */
-.message-body img {
-  display: block;
-  margin-top: 25px;
-  max-width: 75%;
-}
-
-.centered{
-  text-align: center;
-}
-
-.padded {
-  padding: 10px;
-}
-
-.rounded {
-  border: thin solid black;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-/* Use this to hide certain elements like forms if the
-   user is not logged in or viewing their own page. */
-.hidden {
-  display: none;
+  font-family: 'Gill Sans';
+  color: rgb(70, 68, 68);
+  font-size: 20px;
 }
